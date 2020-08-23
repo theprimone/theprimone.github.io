@@ -83,9 +83,8 @@ theme: hexo-theme-next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  # repo: https://github.com/zpr1g/zpr1g.github.io
-  repo: https://github_token@github.com/zpr1g/zpr1g.github.io
-  branch: master
+  repo: git@github.com:zpr1g/zpr1g.github.io.git
+  branch: gh-pages
   message: 
 
 # Markdown-it config

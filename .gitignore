@@ -6,3 +6,5 @@ node_modules/
 public/
 .deploy*/
 yarn.lock
+github-deploy-key
+github-deploy-key.pub
