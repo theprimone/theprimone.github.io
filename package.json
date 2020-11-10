@@ -10,7 +10,8 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "dev": "npm run clean && npm run build && npm run server"
+    "dev": "npm run clean && npm run build && npm run server",
+    "start": "npm run dev"
   },
   "dependencies": {
     "hexo": "^5.0.0",
