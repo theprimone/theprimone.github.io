@@ -167,7 +167,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: https://github.com/zpr1g.png #/images/avatar.gif
+  url: https://github.com/theprimone.png #/images/avatar.gif
   # If true, the avatar will be dispalyed in circle.
   rounded: true
   # If true, the avatar will be rotated with the cursor.
@@ -181,7 +181,7 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  GitHub: https://github.com/zpr1g || fab fa-github
+  GitHub: https://github.com/theprimone || fab fa-github
   E-Mail: mailto:yuns.xie@qq.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Google: https://plus.google.com/yourname || fab fa-google
@@ -394,7 +394,7 @@ bookmark:
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
   enable: true
-  permalink: https://github.com/zpr1g
+  permalink: https://github.com/theprimone
   title: Follow me on GitHub
 
 
@@ -586,7 +586,7 @@ comments:
 # Disqus
 disqus:
   enable: true
-  shortname: zpr1g
+  shortname: theprimone
   count: true
   #post_meta_order: 0
 
