@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"theprimone.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="如果暂时不关心实现可直接克隆该仓库 ant-design-pro-v2-plus 前言之前有根据别人的实现做过一些研究（具体可见[仅供参考]基于 ant design pro 2.1.1 页面标签化展示的研究与实现），其实现原理是根据注入到 BasicLayout 的 menuData 取得所有可用的页签组件 ，然后再根据点击事件来添加或者删除相关页签。 由于项目需求，需要一个自带标签页功能的 a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 ant design pro 2.3.1 页面标签化展示的研究与实现">
+<meta property="og:url" content="https://theprimone.top/2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/index.html">
+<meta property="og:site_name" content="懒生">
+<meta property="og:description" content="如果暂时不关心实现可直接克隆该仓库 ant-design-pro-v2-plus 前言之前有根据别人的实现做过一些研究（具体可见[仅供参考]基于 ant design pro 2.1.1 页面标签化展示的研究与实现），其实现原理是根据注入到 BasicLayout 的 menuData 取得所有可用的页签组件 ，然后再根据点击事件来添加或者删除相关页签。 由于项目需求，需要一个自带标签页功能的 a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-06T09:38:55.000Z">
+<meta property="article:modified_time" content="2019-09-06T22:50:16.000Z">
+<meta property="article:author" content="theprimone">
+<meta property="article:tag" content="and design pro">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://theprimone.top/2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>基于 ant design pro 2.3.1 页面标签化展示的研究与实现 | 懒生</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128067398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-128067398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">懒生</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录日常</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-collections">
+
+    <a href="/collections/" rel="section"><i class="fa fa-cubes fa-fw"></i>收藏</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-star fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/theprimone" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://theprimone.top/2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/theprimone.png">
+      <meta itemprop="name" content="theprimone">
+      <meta itemprop="description" content="如果不去做的话，那就意味着不重要，至少现目前来看。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="懒生">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于 ant design pro 2.3.1 页面标签化展示的研究与实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-06 09:38:55" itemprop="dateCreated datePublished" datetime="2019-07-06T09:38:55+00:00">2019-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-06 22:50:16" itemprop="dateModified" datetime="2019-09-06T22:50:16+00:00">2019-09-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>如果暂时不关心实现可直接克隆该仓库 <a target="_blank" rel="noopener" href="https://github.com/zpr1g/ant-design-pro-v2-plus">ant-design-pro-v2-plus</a></strong></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前有根据别人的实现做过一些研究（具体可见<a href="/2019/04/30/2019-04-30-ant-design-pro-tabs-page/">[仅供参考]基于 ant design pro 2.1.1 页面标签化展示的研究与实现</a>），其实现原理是根据注入到 <code>BasicLayout</code> 的 <code>menuData</code> 取得所有可用的页签组件 ，然后再根据点击事件来添加或者删除相关页签。</p>
+<p>由于项目需求，需要一个自带标签页功能的 ant-design-pro （以下简称 pro ） 脚手架，所以重新克隆了仓库来实现该功能，快速在仓库中基于之前的实践实现了该功能，随后发现了一个比较严重的问题：像分步表单和个人中心这两个页面是使用的子路由切换子组件，导致了无法切换的 bug 。通过路由切换子组件功能还是很重要的，虽然之前的项目没有使用这种方式。然后就陷入了沉思，应该怎么办呢？</p>
+<p>苦思冥想一番后，突然灵光一闪， pro 自带没有便签页功能，是通过传入 children 来渲染 <code>BasicLayout</code> 下的页面的，那岂不是可以通过判断传入的 <code>children</code> 来更新标签页。说干就干，一番操作之后，果不其然，理论还是行得通的，这样就保留了通过路由切换子组件的功能。</p>
+<a id="more"></a>
+
+<h2 id="研究与实现"><a href="#研究与实现" class="headerlink" title="研究与实现"></a>研究与实现</h2><h3 id="src-pages-Authorized-js"><a href="#src-pages-Authorized-js" class="headerlink" title="src/pages/Authorized.js"></a>src/pages/Authorized.js</h3><p>由于之前的实践，需要判断一个用户的 <code>rootTabKey</code>，不同菜单权限的用户可能 <code>rootTabKey</code> 也不同 ，且用户不可删除该 tab 。所以将请求菜单的 action 提升到了这里，通过给 <code>BasicLayout</code> 注入 <code>rootTabKey</code> 实现。</p>
+<p>最近发现登录页面使用了 <code>menu</code> 这个全局 model 来生成页面标题，所以如果在 <code>BasicLayout</code> 中请求菜单信息时会先获取到登录的相关路由配置，从而导致标签页异常。又因为菜单可能会涉及用户权限，所以将该请求移到了 <code>Authorized</code> 中是有必要的。</p>
+<h3 id="ChildrenTabs-组件"><a href="#ChildrenTabs-组件" class="headerlink" title="ChildrenTabs 组件"></a>ChildrenTabs 组件</h3><p>基于 <code>Tabs</code> 组件封装而成，可根据传入的 <code>activeKey</code> ， <code>activetTitle</code> ， <code>children</code> 实现 <code>children</code> 的标签化。</p>
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> interface ChildrenTab &#123;</span><br><span class="line">  <span class="comment">/** tab&#x27;s title */</span></span><br><span class="line">  tab: string;</span><br><span class="line">  key: string;</span><br><span class="line">  content: React.ReactChildren | JSX.Element;</span><br><span class="line">  <span class="comment">/** used to indicate the tab need refresh */</span></span><br><span class="line">  refresh?: boolean;</span><br><span class="line">  <span class="comment">/** used to extends tab&#x27;s properties */</span></span><br><span class="line">  [k: string]: any;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTab</span>(<span class="params">newTab: ChildrenTab, activedTabs: ChildrenTab[]</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * filter 过滤路由 为 &#x27;/&#x27; 的 children</span></span><br><span class="line"><span class="comment">   * map 添加第一个 tab 不可删除</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">return</span> [...activedTabs, newTab]</span><br><span class="line">    .filter(<span class="function"><span class="params">item</span> =&gt;</span> item.path !== <span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    .map(<span class="function">(<span class="params">item, index</span>) =&gt;</span></span><br><span class="line">      activedTabs.length === <span class="number">0</span> &amp;&amp; index === <span class="number">0</span></span><br><span class="line">        ? &#123; ...item, <span class="attr">closable</span>: <span class="literal">false</span> &#125;</span><br><span class="line">        : &#123; ...item, <span class="attr">closable</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">switchAndUpdateTab</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  activeIndex: number,</span></span></span><br><span class="line"><span class="function"><span class="params">  tabName: string,</span></span></span><br><span class="line"><span class="function"><span class="params">  extraTabProperties: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  children: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  activedTabs: ChildrenTab[]</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; path, content, refresh, ...rest &#125; = activedTabs[activeIndex];</span><br><span class="line">  activedTabs.splice(activeIndex, <span class="number">1</span>, &#123;</span><br><span class="line">    tab: tabName,</span><br><span class="line">    content: refresh ? content : children,</span><br><span class="line">    ...rest,</span><br><span class="line">    ...extraTabProperties,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">/** map 删除后的 activedTabs 长度为 1 时不可删除 */</span></span><br><span class="line">  <span class="keyword">return</span> activedTabs.map(<span class="function"><span class="params">item</span> =&gt;</span> (activedTabs.length === <span class="number">1</span> ? &#123; ...item, <span class="attr">closable</span>: <span class="literal">false</span> &#125; : item));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> interface ChildrenTabsProps &#123;</span><br><span class="line">  activeKey: string;</span><br><span class="line">  activeTitle: string;</span><br><span class="line">  handleTabChange: <span class="function">(<span class="params">keyToSwitch: string, activedTabs: any[]</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line">  extraTabProperties?: &#123;&#125;;</span><br><span class="line">  tabsConfig?: TabsProps;</span><br><span class="line">  afterRemoveTab?: <span class="function">(<span class="params">removeKey: string, nextTabKey: string, activedTabs: ChildrenTab[]</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line">  <span class="comment">/** children is used to create tab, switch and update tab */</span></span><br><span class="line">  children: React.ReactChildren;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface ChildrenTabsState &#123;</span><br><span class="line">  activedTabs: ChildrenTab[];</span><br><span class="line">  activeKey: string | <span class="literal">null</span>;</span><br><span class="line">  nextTabKey: string | <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// lifecycle</span></span><br><span class="line"><span class="keyword">static</span> <span class="function"><span class="title">getDerivedStateFromProps</span>(<span class="params">props: ChildrenTabsProps, state: ChildrenTabsState</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; children, activeKey, activeTitle, extraTabProperties &#125; = props;</span><br><span class="line">  <span class="keyword">const</span> &#123; activedTabs, nextTabKey &#125; = state;</span><br><span class="line">  <span class="comment">// return state and set nextTabKey to `null` after delete tab</span></span><br><span class="line">  <span class="keyword">if</span> (nextTabKey) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      activedTabs,</span><br><span class="line">      activeKey: nextTabKey,</span><br><span class="line">      nextTabKey: <span class="literal">null</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> activedTabIndex = _findIndex(activedTabs, &#123; <span class="attr">key</span>: activeKey &#125;);</span><br><span class="line">  <span class="comment">// return state after switch or update tab</span></span><br><span class="line">  <span class="keyword">if</span> (activedTabIndex &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      activedTabs: switchAndUpdateTab(</span><br><span class="line">        activedTabIndex,</span><br><span class="line">        activeTitle,</span><br><span class="line">        extraTabProperties,</span><br><span class="line">        children,</span><br><span class="line">        activedTabs</span><br><span class="line">      ),</span><br><span class="line">      activeKey,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// return state to add tab</span></span><br><span class="line">  <span class="keyword">const</span> newTab = &#123;</span><br><span class="line">    tab: activeTitle,</span><br><span class="line">    key: activeKey,</span><br><span class="line">    content: children,</span><br><span class="line">    ...extraTabProperties,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    activedTabs: addTab(newTab, activedTabs),</span><br><span class="line">    activeKey,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现添加 tab 的功能无疑是最简单的，但是需要注意过滤掉根路由且当添加第一个路由时，不可删除。删除功能重构了好几次，最后是通过在 <code>getDerivedStateFromProps</code> 中判断是否有删除 tab 的相邻 tab key ，即 <code>nextTabKey</code> 实现。如果存在，直接设置 <code>activeKey</code> 为 <code>nextTabKey</code> ，并还原 <code>nextTabKey</code> 为 <code>null</code> 。<strong>切换并更新</strong>的功能可能涉及页面子路由，所以统一更新 tab 组件。</p>
+<h3 id="PageTabs-组件"><a href="#PageTabs-组件" class="headerlink" title="PageTabs 组件"></a>PageTabs 组件</h3><p>决定系统页签的展示方式。</p>
+<p>首先如果是系统根路由 <code>proRootPath</code> （默认 <code>&#39;/&#39;</code>），传入的 <code>children</code> 会重定向到新页面，所以需要直接返回 <code>children</code> 组件。如果不返回 <code>children</code> 的话，会导致重定向失败，页面空白异常。</p>
+<p>其次，由于系统使用的 <code>menuData</code> 是经过过滤的，像一些隐藏的页面也是需要页签展示的，所以需要保存并使用 <code>menu model</code> 中的 <code>originalMenuData</code> 来获取页签的 <code>id</code> 和 <code>name</code> 。</p>
+<h4 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// result: [pathID, pathName]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMetadataOfTab</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  childrenPathname: string,</span></span></span><br><span class="line"><span class="function"><span class="params">  originalMenuData: MenuItem[]</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): [<span class="title">string</span>, <span class="title">string</span>] </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getMetadata</span>(<span class="params">path: string, menuData: MenuItem[], parent: MenuItem | <span class="literal">null</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result: [string, string];</span><br><span class="line">    menuData.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">/** match prefix iteratively */</span></span><br><span class="line">      <span class="keyword">if</span> (pathToRegexp(<span class="string">`<span class="subst">$&#123;item.path&#125;</span>(.*)`</span>).test(path)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!parent &amp;&amp; item.name) &#123;</span><br><span class="line">          result = [item.path, item.name];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (parent &amp;&amp; !parent.component &amp;&amp; item.component &amp;&amp; item.name) &#123;</span><br><span class="line">          <span class="comment">/** create new tab if item has name and item&#x27;s parant route has not component */</span></span><br><span class="line">          result = [item.path, item.name];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/** get children pathID, pathName, shouldUpdate recursively */</span></span><br><span class="line">        <span class="keyword">if</span> (item.children) &#123;</span><br><span class="line">          result = getMetadata(path, item.children, item) || result;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> getMetadata(childrenPathname, originalMenuData, <span class="literal">null</span>) || [<span class="string">&#x27;404&#x27;</span>, <span class="string">&#x27;Error&#x27;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于使用了页面路径作为页签的 <code>tab id</code> ，所以页签的展示完全是由 <code>tab id</code> 决定的。</p>
+<h3 id="src-layouts-BasicLayout-js"><a href="#src-layouts-BasicLayout-js" class="headerlink" title="src/layouts/BasicLayout.js"></a>src/layouts/BasicLayout.js</h3><h4 id="核心代码-2"><a href="#核心代码-2" class="headerlink" title="核心代码"></a>核心代码</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> renderMenuData = transferMenuData(menuLoading, menuData);</span><br><span class="line"><span class="keyword">const</span> renderContent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (pageTabs) &#123;</span><br><span class="line">    <span class="keyword">if</span> (renderMenuData) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">PageTabs</span> &#123;<span class="attr">...this.props</span>&#125; /&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">PageLoading</span> /&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> children;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>renderMenuData</code> ： 根据 <code>menuLoading</code> ， <code>menuData</code> 判断是否需要展示的菜单数据（由于用户登录相关页面也会修改 <code>menuData</code> ）。<br /><br><code>renderContent</code> ： 根据 <code>pageTabs</code> 和 <code>renderMenuData</code> 渲染页面。</p>
+<p><strong>得益于采用了路由控制的方式，所以不需要像之前的方案一样向 SiderMenu 和 Header 传入点击处理事件。标签页的功能都在 <code>BasicLayout</code> 中实现，新增标签页通过路由切换的方式即可。</strong></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>由于使用了标签页的方式布局，所以还需要修改 <code>PageHeaderWrapper component</code> 根节点的 <code>style</code> 属性。</li>
+<li>性能问题，标签页切换可能导致已打开的标签页的重复渲染，可使用高级组件 <code>withRoutePage</code> （<code>import &#123; withRoutePage &#125; from &#39;@/utils/enhanceUtils&#39;</code>） 对页面做性能优化。</li>
+</ol>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><h3 id="为什么不用-v4-？"><a href="#为什么不用-v4-？" class="headerlink" title="为什么不用 v4 ？"></a>为什么不用 v4 ？</h3><p>在实现该功能的时候， v4 已经正式推出了，本来也计划直接用 v4 的，奈何 <code>npm run fetch:blocks</code> 安装所有区块总是失败，加之也已经比较熟悉 v2 了，所以依然选择了 v2 。</p>
+<h3 id="已知-v2-和-v4-的不同"><a href="#已知-v2-和-v4-的不同" class="headerlink" title="已知 v2 和 v4 的不同"></a>已知 v2 和 v4 的不同</h3><p>像分步表单这种通过路由控制表单进度的方式，按理说应该做到如果没有执行前一步需要重定向到第一步。发现了 v4 是通过 dva 的状态判断表单进度的，所以根本不会改变路由。v2 由于没有使用区块的方式，分步表单可以灵活的使用路由切换，但是没有做进度的重定向，所以这构成了在两个版本在行为上的不同。为什么说这个呢？大概是当时眼花了，看到 v2 切换进度时路由并没有变化，还以为有什么改变路由不改变 location 的黑科技呢 _(:3J∠)_</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/and-design-pro/" rel="tag"># and design pro</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/03/2019-07-03-react-attainment/" rel="prev" title="React 开发心得">
+      <i class="fa fa-chevron-left"></i> React 开发心得
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/12/2019-07-12-ts-abc-2/" rel="next" title="TypeScript 从入门到放弃之基础类型">
+      TypeScript 从入门到放弃之基础类型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">研究与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#src-pages-Authorized-js"><span class="nav-number">2.1.</span> <span class="nav-text">src&#x2F;pages&#x2F;Authorized.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChildrenTabs-%E7%BB%84%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">ChildrenTabs 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.1.</span> <span class="nav-text">核心代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PageTabs-%E7%BB%84%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">PageTabs 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">核心代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src-layouts-BasicLayout-js"><span class="nav-number">2.4.</span> <span class="nav-text">src&#x2F;layouts&#x2F;BasicLayout.js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81-2"><span class="nav-number">2.4.1.</span> <span class="nav-text">核心代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-v4-%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">为什么不用 v4 ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5-v2-%E5%92%8C-v4-%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="nav-number">4.2.</span> <span class="nav-text">已知 v2 和 v4 的不同</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="theprimone"
+      src="https://github.com/theprimone.png">
+  <p class="site-author-name" itemprop="name">theprimone</p>
+  <div class="site-description" itemprop="description">如果不去做的话，那就意味着不重要，至少现目前来看。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/theprimone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;theprimone" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuns.xie@qq.com" title="E-Mail → mailto:yuns.xie@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">theprimone</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://theprimone.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theprimone.top/2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/";
+    this.page.identifier = "2019/07/06/2019-07-06-ant-design-pro-tabs-page-by-route/";
+    this.page.title = "基于 ant design pro 2.3.1 页面标签化展示的研究与实现";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://theprimone.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

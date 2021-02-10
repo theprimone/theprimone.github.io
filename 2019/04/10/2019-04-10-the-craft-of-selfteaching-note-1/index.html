@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"theprimone.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="说在前面一次偶然的机会（逛微博）让我看到了这个 repo ，感觉挺有意思的，毕竟我也刚踏上自学之旅没多久，看看有什么先进的经验思想可以汲取。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《自学是门手艺》 读书笔记（1）">
+<meta property="og:url" content="https://theprimone.top/2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/index.html">
+<meta property="og:site_name" content="懒生">
+<meta property="og:description" content="说在前面一次偶然的机会（逛微博）让我看到了这个 repo ，感觉挺有意思的，毕竟我也刚踏上自学之旅没多久，看看有什么先进的经验思想可以汲取。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/1bff2aff9811ea44105ecb073346b22fed83f926/images/george-boole-in-1864.png">
+<meta property="og:image" content="https://github.com/selfteaching/the-craft-of-selfteaching/raw/37f3694323cd449821a1cc5f163dcdb58db6d3a8/images/string-concepts.png">
+<meta property="og:image" content="https://github.com/selfteaching/the-craft-of-selfteaching/raw/ac1815db9b63ff40b051897ac3c640b488d7606b/images/python-containers-final.png">
+<meta property="og:image" content="https://github.com/selfteaching/the-craft-of-selfteaching/raw/ac1815db9b63ff40b051897ac3c640b488d7606b/images/list-concepts.png">
+<meta property="article:published_time" content="2019-04-10T09:34:16.000Z">
+<meta property="article:modified_time" content="2019-04-10T09:34:21.000Z">
+<meta property="article:author" content="theprimone">
+<meta property="article:tag" content="自学是门手艺">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/1bff2aff9811ea44105ecb073346b22fed83f926/images/george-boole-in-1864.png">
+
+<link rel="canonical" href="https://theprimone.top/2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《自学是门手艺》 读书笔记（1） | 懒生</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128067398-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-128067398-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">懒生</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录日常</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-collections">
+
+    <a href="/collections/" rel="section"><i class="fa fa-cubes fa-fw"></i>收藏</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-star fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/theprimone" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://theprimone.top/2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/theprimone.png">
+      <meta itemprop="name" content="theprimone">
+      <meta itemprop="description" content="如果不去做的话，那就意味着不重要，至少现目前来看。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="懒生">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《自学是门手艺》 读书笔记（1）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-04-10 09:34:16 / 修改时间：09:34:21" itemprop="dateCreated datePublished" datetime="2019-04-10T09:34:16+00:00">2019-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h2><p>一次偶然的机会（逛微博）让我看到了这个 repo ，感觉挺有意思的，毕竟我也刚踏上自学之旅没多久，看看有什么先进的经验思想可以汲取。</p>
+<a id="more"></a>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/01.preface.ipynb">前言</a></h2><blockquote>
+<p>一切与自学相关的技巧都是老生常谈。</p>
+</blockquote>
+<p>毕业以来，越发发现自学能力的重要性。特别是在临毕业的时候，在一家公司的校招培训期间，某总的一席话也给了我很大的影响，只记得两个关键词“自变量”和“因变量”，每个人在社会中的所占的作用域和值域都取决于个人。所以，比起多愁善感，自怨自艾，不如发奋图强，一心向前。</p>
+<h2 id="如何证明你真的读过这本书？"><a href="#如何证明你真的读过这本书？" class="headerlink" title="如何证明你真的读过这本书？"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/02.proof-of-work.ipynb">如何证明你真的读过这本书？</a></h2><p>那我就以此文作记录吧。</p>
+<h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><h3 id="为什么一定要掌握自学能力？"><a href="#为什么一定要掌握自学能力？" class="headerlink" title="为什么一定要掌握自学能力？"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.A.better.teachyourself.ipynb">为什么一定要掌握自学能力？</a></h3><blockquote>
+<p>没有自学能力的人没有未来。</p>
+</blockquote>
+<p>的确，从自我驱动的开始逐渐深入学习前端和 Python 以来，越是学习，越是发现自己的不足。当然主要还是本科的时候基础太差，有些东西终究是要还的。</p>
+<blockquote>
+<p>社会发展越来越快，你要面对的人生越来越长，在那一段与你的直觉猜想并不相同的漫漫人生路上，你居然没有磨练过自学能力，竟然只能眼睁睁地看着自己被甩下且无能为力，难道接下来要在那么长的时间里“苦中作乐”吗？</p>
+</blockquote>
+<p>很庆幸，在我毕业之后，我终于 get 了这项技能，目前还在不断挖坑填坑之中。</p>
+<blockquote>
+<p>不过，以我的观察，无论是什么，哪怕只是学会一点点，都比不会强。哪怕只是中等水平，就足够应付生活、工作、养家糊口的需求。</p>
+</blockquote>
+<p>技多不压身，兴趣爱好广泛我倒是做到了，不过现目前拿不出一个精通的，确实很尴尬，多希望将来能在简历上写上一个“精通”呢！</p>
+<h3 id="为什么把编程当作自学的入口？"><a href="#为什么把编程当作自学的入口？" class="headerlink" title="为什么把编程当作自学的入口？"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.B.why.start.from.learning.coding.ipynb">为什么把编程当作自学的入口？</a></h3><blockquote>
+<p>许多年前，不识字，被称为文盲……</p>
+<p>后来，人们反应过来了，不识英文，也是文盲，因为科学文献的主导语言是英文，读不懂英文，什么都吃不上热乎的；等菜好不容易端上来了吧，早就凉了不说，味道都常常会变……</p>
+<p>再后来，不懂基本计算机操作技能的，也算是文盲，因为他们无论做什么事情，效率都太低下了，明明可以用快捷键一下子完成的事情，却非要手动大量重复……</p>
+<p>到了最近，不懂数据分析的，也开始算作文盲了。许多年前人们惊呼信息时代来了的时候，其实暂时体会不到什么太多的不同。然而，许多年过去，互联网上的格式化数据越来越多，不仅如此，实时产出的格式化数据也越来越多，于是，数据分析不仅成了必备的能力，而且早就开始直接影响一个人的薪资水平。</p>
+</blockquote>
+<p>对啊，“文盲”都在进步呢！这么说来，数据分析真的很重要了。</p>
+<p><strong>Forward References</strong>（过早引用/前置引用）</p>
+<blockquote>
+<p>工作中、生活里，充满了各式各样的“过早引用”。</p>
+</blockquote>
+<blockquote>
+<p>学编程中最重要的活动就是“阅读官方文档”。学 Python 更是如此。Python 有很多非常优秀的地方，其中一个令人无法忽视的优点就是它的文档完善程度极好。</p>
+</blockquote>
+<p>以后不能再看到英文文档就畏惧了，虽然阅读没什么大问题，就是效率太低了。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiaolai/everyone-can-use-english">《人人都能用英语》</a></p>
+</blockquote>
+<p>那看完这个再学习一下，英语想想从六年级开始，都学了快十年了吧，还是停留在一个勉强能“看”的水平。</p>
+<blockquote>
+<p>自学者最大的感受就是万物相通。他们经常说的话有这么一句：“…… 到最后，都是一样的呢。”</p>
+</blockquote>
+<p>的确，重要的是思想。拿编程来说的话，其实懂了数据结构和算法，语言都是次要。然而，我数据结构和算法都很菜，又是一个缺点……</p>
+<blockquote>
+<p>在这个领域里，自学的人最多……</p>
+</blockquote>
+<p>跟上大部队。</p>
+<h3 id="只靠阅读习得新技能"><a href="#只靠阅读习得新技能" class="headerlink" title="只靠阅读习得新技能"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.C.must.learn.sth.only.by.reading.ipynb">只靠阅读习得新技能</a></h3><blockquote>
+<p>自己生活工作学习上遇到的所有疑问，书本里应该都有答案 —— 起码有所参考。</p>
+</blockquote>
+<blockquote>
+<p>“不是什么东西都可以从书本里学到的……”这话听起来那么有道理，只不过是因为自己读书不够多、不够对而已。</p>
+</blockquote>
+<p>又开新坑了，英语真的很重要，至少在当下而言。</p>
+<ul>
+<li>中国人写的英文书<ul>
+<li>张纯如</li>
+<li>郑念的 Life and Death in Shanghai</li>
+</ul>
+</li>
+<li>老外写的关于中国的书<ul>
+<li>费正清的剑桥中国史（The Cambridge History of China）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>英语在科学研究领域早已成为“主导语言”（Dominant Language）也是不争的事实。</p>
+</blockquote>
+<blockquote>
+<p>民国时代的作者连阔如先生写的《江湖丛谈》，粗略扫过你就知道了，江湖那点事儿，也早就有人给你里里外外翻了个遍…… 只不过这书不太容易买到就是了。</p>
+</blockquote>
+<p>这就让人感兴趣了呢！</p>
+<blockquote>
+<p>所以，只要你有一次“只靠阅读习得一项新技能”的经验，你就变成另外一个人了。你会不由自主、哪怕下意识里都会去运用你新习得的能力…… 从这个角度看，自学很上瘾！能上瘾，却不仅无害，还好处无穷，这样的好事，恐怕也就这一个了罢。</p>
+</blockquote>
+<p>这个说法可以的，自从毕业之后通过阅读习得一些能力之后就是一直阅读一直爽啊，只是现在的困境就是读英文文档效率太低了。</p>
+<h3 id="开始阅读前的一些准备"><a href="#开始阅读前的一些准备" class="headerlink" title="开始阅读前的一些准备"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.D.preparation.for.reading.ipynb">开始阅读前的一些准备</a></h3><blockquote>
+<p><strong>别怕</strong>，无论说给自己，还是讲给别人，都是一样的，它可能是人生中最重要的鼓励词。</p>
+</blockquote>
+<h3 id="E-编程入门"><a href="#E-编程入门" class="headerlink" title="E.编程入门"></a>E.编程入门</h3><h4 id="入口"><a href="#入口" class="headerlink" title="入口"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.1.entrance.ipynb">入口</a></h4><h5 id="乔治·布尔"><a href="#乔治·布尔" class="headerlink" title="乔治·布尔"></a>乔治·布尔</h5><p><img src="https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/1bff2aff9811ea44105ecb073346b22fed83f926/images/george-boole-in-1864.png"></p>
+<blockquote>
+<p>在大学任职期间，乔治·布尔写了两本教科书，一本讲微分方程，另外一本讲差分方程，而前者， <a target="_blank" rel="noopener" href="https://archive.org/details/atreatiseondiff06boolgoog/page/n6">A TREATISE ON DIFFERENTIAL EQUATIONS</a> ，直到今天，依然难以超越。</p>
+</blockquote>
+<blockquote>
+<p>有本书可以闲暇时间翻翻，<a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B0091XBUTM/ref=dbs_a_def_rwt_hsch_vapi_tkin_p1_i4">The Logician and the Engineer: How George Boole and Claude Shannon Created the Information Age</a>。可以说，没有乔治·布尔的布尔代数，没有克劳德·香农的逻辑电路，就没有后来的计算机，就没有后来的互联网，就没有今天的信息时代 —— 世界将会怎样？</p>
+</blockquote>
+<p>数学可真有意思！</p>
+<h5 id="布尔运算"><a href="#布尔运算" class="headerlink" title="布尔运算"></a>布尔运算</h5><blockquote>
+<p>计算器和计算机都是电子设备，但，计算机更为强大的原因，用通俗的说法就是它“可编程”（Programable） —— 而所谓可编程的核心就是布尔运算及其相应的流程控制（Control Flow）；没有布尔运算能力就没有办法做流程控制；没有流程控制就只能“按顺序执行”，那就显得“很不智能”……</p>
+</blockquote>
+<h5 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>): <span class="comment">#range(2,100)表示含左侧2，不含右侧100，是不是第三次看到这个说法了？</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        print(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:                  <span class="comment"># 这里目前你可能看不懂…… 但，先关注结果吧。</span></span><br><span class="line">        print(n)</span><br></pre></td></tr></table></figure>
+<p>尴尬了，后边的 else 我也没看懂，啊啊啊！ 问人之后才知道 for 循环正常退出会进入 else ， 2333。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        print(n)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n ** <span class="number">0.5</span>) + <span class="number">1</span>): <span class="comment">#为什么要 +1 以后再说…… n 的 1/2 次方，相当于根号 n。</span></span><br><span class="line">        <span class="keyword">if</span> (n % i) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(n)</span><br></pre></td></tr></table></figure>
+<p>优化也没搞懂（为什么除到 √n 后一个数就行了），应该涉及到一个神奇的数学算法了。</p>
+<h4 id="值及其相应的运算"><a href="#值及其相应的运算" class="headerlink" title="值及其相应的运算"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.2.values-and-their-operators.ipynb">值及其相应的运算</a></h4><blockquote>
+<p>针对数字进行计算的操作符有加减乘除商余幂：+、-、*、/、//、%、**。</p>
+</blockquote>
+<h4 id="流程控制-1"><a href="#流程控制-1" class="headerlink" title="流程控制"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.3.controlflow.ipynb">流程控制</a></h4><blockquote>
+<p>迭代有序数据类型，用 for … in … ，如果需要处理没有 break 发生的情况，用 for … else …</p>
+</blockquote>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.4.functions.ipynb">函数</a></h4><blockquote>
+<p>当我们想把变量或者表达式的值插入字符串中的时候，可以用 f-string：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Ann&#x27;</span></span><br><span class="line">age = <span class="string">&#x27;22&#x27;</span></span><br><span class="line">print(<span class="string">f&#x27;<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> years old.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>但，这并不是 print() 这个函数的功能，这实际上是 <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">f-string</a> 的功能，f-string 中用花括号 {} 扩起来的部分是表达式，最终转换成字符串的时候，那些表达式的值（而不是变量或者表达式本身）会被插入相应的位置……</p>
+</blockquote>
+<p>也是学习了 <a target="_blank" rel="noopener" href="https://github.com/richardchien/nonebot">none-bot</a> 才知道这种方式，确实方便了许多。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print">print() 的官方文档说明</a></p>
+<blockquote>
+<p>很多人只看各种教材、教程，却从来不去翻阅官方文档 —— 到最后非常吃亏。只不过是多花一点点的功夫而已，看过之后，就会知道：原来 print() 这个函数是可以往文件里写数据的，只要指定 file 这个参数为一个已经打开的文件对象就可以了（真的有很多人完全不知道）……</p>
+</blockquote>
+<p>不幸的是，我就是很多人中的一个。</p>
+<blockquote>
+<p>“看说明书” 就是这样，全都看了，真不一定全部看懂，但，看总是比不看强，因为总是有能看懂的部分……</p>
+</blockquote>
+<p>的确，有所收获才是更重要的。</p>
+<p>还有就是这个 <code>sep=&#39; &#39;,</code> （拷贝出来的）在官方文档的页面上真没看出来有空格，真是有趣。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.5.strings.ipynb">字符串</a></h4><blockquote>
+<p>因此，在计算机上，浮点数字的精度总有极限。有兴趣进一步可以看看<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/decimal.html">关于 decimal 模块的文档</a>。</p>
+</blockquote>
+<blockquote>
+<p>把单个字符转换成码值的函数是 ord()，它只接收单个字符，否则会报错；它返回该字母的 unicode 编码。与 ord() 相对的函数是 chr()，它接收且只接收一个整数作为参数，而后返回相应的字符。ord() 接收多个字符的话会报错。</p>
+</blockquote>
+<blockquote>
+<p>由数字构成的字符串，可以被转换成数值，转换整数用 int() ，转换浮点数字用 float()。</p>
+<p>与之相对，用 str()，可以将数值转换成字符串类型。</p>
+<p>注意，int() 在接收字符串为参数的时候，只能做整数转换。</p>
+</blockquote>
+<blockquote>
+<p>input() 这个内建函数的功能是接收用户的键盘输入，而后将其作为<strong>字符串</strong>返回。</p>
+</blockquote>
+<blockquote>
+<p>由于历史原因，Linux/Mac/Windows 操作系统中，换行符号的使用各不相同。Unix 类操作系统（包括现在的 MacOS），用的是 \n；Windows 用的是 \r\n，早期苹果公司的 Macintosh 用的是 \r（参见 Wikipedia: Newline）。</p>
+<p>所以，一个字符串，有两种形式，raw 和 presentation，在后者中，\t 被转换成制表符，\n 被转换成换行。</p>
+<p>在写程序的过程中，我们在代码中写的是 raw，而例如当我们调用 print() 将字符串输出到屏幕上时，是 presentation</p>
+</blockquote>
+<p>正如本节开篇所说：</p>
+<blockquote>
+<p>在任何一本编程书籍之中，关于字符串的内容总是很长 —— 就好像每本英语语法书中，关于动词的内容总是占全部内容的至少三分之二。这也没什么办法，因为处理字符串是计算机程序中最普遍的需求 —— 因为程序的主要功能就是完成人机交互，人们所用的就是字符串而不是二进制数字。</p>
+</blockquote>
+<p>看完了才发现 Python 对于字符串已经有了很多很有用的内建方法了，之前还自己折腾写了些格式化和排版的方法，现在看来，这也太逗了，而且还写得很烂……</p>
+<p><img src="https://github.com/selfteaching/the-craft-of-selfteaching/raw/37f3694323cd449821a1cc5f163dcdb58db6d3a8/images/string-concepts.png"></p>
+<p>看完这一节，又深刻体会到官方文档重要性！</p>
+<h4 id="数据容器"><a href="#数据容器" class="headerlink" title="数据容器"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.6.containers.ipynb">数据容器</a></h4><h5 id="列表（List）"><a href="#列表（List）" class="headerlink" title="列表（List）"></a>列表（List）</h5><p><img src="https://github.com/selfteaching/the-craft-of-selfteaching/raw/ac1815db9b63ff40b051897ac3c640b488d7606b/images/python-containers-final.png"></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/3.7/tutorial/datastructures.html#tut-listcomps">List Comprehension</a></p>
+<blockquote>
+<p>Comprehend 这个词的意思除了 “理解” 之外，还有另外一个意思，就是 “包括、囊括” —— 这样的话，你就大概能理解这种做法为什么被称作 List Comprehension 了。中文翻译中，怎么翻译的都有，“列表生成器”、“列表生成式” 等等，都挺好。但是，被翻译成 “列表解析器”，就不太好了，给人的感觉是操作反了……</p>
+</blockquote>
+<p><img src="https://github.com/selfteaching/the-craft-of-selfteaching/raw/ac1815db9b63ff40b051897ac3c640b488d7606b/images/list-concepts.png"></p>
+<h5 id="元组（Tuple）"><a href="#元组（Tuple）" class="headerlink" title="元组（Tuple）"></a>元组（Tuple）</h5><blockquote>
+<p>元组是不可变序列，所以，你没办法从里面删除元素。</p>
+<p>但是，你可以在末尾追加元素。所以，严格意义上，对元组来讲，“不可变” 的意思是说，“当前已有部分不可变”……</p>
+</blockquote>
+<h5 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h5><blockquote>
+<p>事实上，每种数据结构（Data Structures —— 在这一章里，我们一直用的概念是 “容器”，其实是指同一事物的两种称呼）都有自己的应用场景。</p>
+</blockquote>
+<blockquote>
+<p>Set 当然也可以进行 Comprehension：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;abcabcdeabcdbcdef&quot;</span></span><br><span class="line">b = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> a <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;abc&#x27;</span>&#125;</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
+<p>注意，并集、交集、差集的方法，可以接收多个集合作为参数 (*other)，但对称差集方法只接收一个参数 (other)。</p>
+<p>对于集合，推荐更多使用方法而不是操作符的主要原因是：更易读 —— 对人来说，因为有意义、有用处的代码终将需要人去维护。</p>
+</blockquote>
+<h6 id="冻结集合"><a href="#冻结集合" class="headerlink" title="冻结集合"></a><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#frozenset">冻结集合</a></h6><h5 id="字典（Dictionary）"><a href="#字典（Dictionary）" class="headerlink" title="字典（Dictionary）"></a>字典（Dictionary）</h5><p>有趣，重新学习一遍基础才理解了什么叫做温故而知新，虽然之前看的廖雪峰的教程，果然是师父领进门，修行靠个人了。虽然想着深耕前端，甚至想把现在的 QQ 机器人用 JS 实现，但是感觉 Python 也很不错啊，还是两手抓吧，哈哈哈。</p>
+<h4 id="文件"><a href="#文件" class="headerlink" title="文件"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.E.7.files.ipynb">文件</a></h4><p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt">words_alpha.txt</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_of_word</span>(<span class="params">word</span>):</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> word:</span><br><span class="line">        <span class="built_in">sum</span> += <span class="built_in">ord</span>(char) - <span class="number">96</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;results.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> result:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;words_alpha.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> file.readlines():</span><br><span class="line">            <span class="keyword">if</span> sum_of_word(word.strip()) == <span class="number">100</span>:</span><br><span class="line">                result.write(word)</span><br></pre></td></tr></table></figure>
+<h3 id="如何从容应对含有过多-“过早引用”-的知识？"><a href="#如何从容应对含有过多-“过早引用”-的知识？" class="headerlink" title="如何从容应对含有过多 “过早引用” 的知识？"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.F.deal-with-forward-references.ipynb">如何从容应对含有过多 “过早引用” 的知识？</a></h3><ul>
+<li>过早引用就是无所不在</li>
+<li>不懂也要硬着头皮读完</li>
+<li>磨练 “只字不差” 的能力</li>
+<li>好的记忆力很重要</li>
+<li>尽快开始整理归纳总结</li>
+</ul>
+<blockquote>
+<p>人家随手做个图，都舍不得不精致：</p>
+<p><a target="_blank" rel="noopener" href="https://nvie.com/posts/iterators-vs-generators/">Iterables vs. Iterators vs. Generators</a></p>
+</blockquote>
+<ul>
+<li>先关注使用再研究原理</li>
+<li>尊重前人的总结和建议</li>
+</ul>
+<blockquote>
+<p>Python 中有一个概念叫 PEP，Python Enhancement Proposals，必须找时间阅读，反复阅读，牢记于心：</p>
+<p><a target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a></p>
+<p>到最后，你会体会到，这不只是编程的事，这种东西背后的思考与体量，对整个人生都有巨大帮助。</p>
+</blockquote>
+<h3 id="官方教程：The-Python-Tutorial"><a href="#官方教程：The-Python-Tutorial" class="headerlink" title="官方教程：The Python Tutorial"></a><a target="_blank" rel="noopener" href="https://github.com/selfteaching/the-craft-of-selfteaching/blob/master/Part.1.G.The-Python-Tutorial-local.ipynb">官方教程：The Python Tutorial</a></h3><p><a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/index.html">The Python Tutorial</a></p>
+<blockquote>
+<p>Python 社区为了建设完善的文档，甚至有专门的文档制作工具 —— 得益于 Python 社区从一开始就非常重视文档规范 —— Sphinx。你在网络上最经常看到的计算机类文档，很可能都在这个网站上：<a target="_blank" rel="noopener" href="https://readthedocs.org/">Read the Docs</a></p>
+</blockquote>
+<blockquote>
+<p>请牢记且遵守这个原则：</p>
+<p>第一查询对象只能是官方文档。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%87%AA%E5%AD%A6%E6%98%AF%E9%97%A8%E6%89%8B%E8%89%BA/" rel="tag"># 自学是门手艺</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/04/08/2019-04-08-clean-code-node-1/" rel="prev" title="《代码整洁之道》 读书笔记（1）">
+      <i class="fa fa-chevron-left"></i> 《代码整洁之道》 读书笔记（1）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/04/11/2019-04-11-the-craft-of-selfteaching-note-2/" rel="next" title="《自学是门手艺》 读书笔记（2）">
+      《自学是门手艺》 读书笔记（2） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">说在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E4%BD%A0%E7%9C%9F%E7%9A%84%E8%AF%BB%E8%BF%87%E8%BF%99%E6%9C%AC%E4%B9%A6%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">如何证明你真的读过这本书？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86"><span class="nav-number">4.</span> <span class="nav-text">第一部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81%E6%8E%8C%E6%8F%A1%E8%87%AA%E5%AD%A6%E8%83%BD%E5%8A%9B%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">为什么一定要掌握自学能力？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E7%BC%96%E7%A8%8B%E5%BD%93%E4%BD%9C%E8%87%AA%E5%AD%A6%E7%9A%84%E5%85%A5%E5%8F%A3%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">为什么把编程当作自学的入口？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E9%9D%A0%E9%98%85%E8%AF%BB%E4%B9%A0%E5%BE%97%E6%96%B0%E6%8A%80%E8%83%BD"><span class="nav-number">4.3.</span> <span class="nav-text">只靠阅读习得新技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E9%98%85%E8%AF%BB%E5%89%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%86%E5%A4%87"><span class="nav-number">4.4.</span> <span class="nav-text">开始阅读前的一些准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8"><span class="nav-number">4.5.</span> <span class="nav-text">E.编程入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3"><span class="nav-number">4.5.1.</span> <span class="nav-text">入口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B9%94%E6%B2%BB%C2%B7%E5%B8%83%E5%B0%94"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">乔治·布尔</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97"><span class="nav-number">4.5.1.2.</span> <span class="nav-text">布尔运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">4.5.1.3.</span> <span class="nav-text">流程控制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%80%BC%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%BA%94%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">4.5.2.</span> <span class="nav-text">值及其相应的运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-1"><span class="nav-number">4.5.3.</span> <span class="nav-text">流程控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">4.5.4.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.5.5.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8"><span class="nav-number">4.5.6.</span> <span class="nav-text">数据容器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%EF%BC%88List%EF%BC%89"><span class="nav-number">4.5.6.1.</span> <span class="nav-text">列表（List）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%83%E7%BB%84%EF%BC%88Tuple%EF%BC%89"><span class="nav-number">4.5.6.2.</span> <span class="nav-text">元组（Tuple）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89"><span class="nav-number">4.5.6.3.</span> <span class="nav-text">集合（Set）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%BB%E7%BB%93%E9%9B%86%E5%90%88"><span class="nav-number">4.5.6.3.1.</span> <span class="nav-text">冻结集合</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%EF%BC%88Dictionary%EF%BC%89"><span class="nav-number">4.5.6.4.</span> <span class="nav-text">字典（Dictionary）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">4.5.7.</span> <span class="nav-text">文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BB%8E%E5%AE%B9%E5%BA%94%E5%AF%B9%E5%90%AB%E6%9C%89%E8%BF%87%E5%A4%9A-%E2%80%9C%E8%BF%87%E6%97%A9%E5%BC%95%E7%94%A8%E2%80%9D-%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%9F"><span class="nav-number">4.6.</span> <span class="nav-text">如何从容应对含有过多 “过早引用” 的知识？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%EF%BC%9AThe-Python-Tutorial"><span class="nav-number">4.7.</span> <span class="nav-text">官方教程：The Python Tutorial</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="theprimone"
+      src="https://github.com/theprimone.png">
+  <p class="site-author-name" itemprop="name">theprimone</p>
+  <div class="site-description" itemprop="description">如果不去做的话，那就意味着不重要，至少现目前来看。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/theprimone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;theprimone" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuns.xie@qq.com" title="E-Mail → mailto:yuns.xie@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">theprimone</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://theprimone.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://theprimone.top/2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/";
+    this.page.identifier = "2019/04/10/2019-04-10-the-craft-of-selfteaching-note-1/";
+    this.page.title = "《自学是门手艺》 读书笔记（1）";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://theprimone.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
