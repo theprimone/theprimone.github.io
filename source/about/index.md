@@ -21,5 +21,5 @@ comments: false
 | 2014.6      | 毕业于重庆璧山中学                                  |
 
 <div style="margin-left: -20px">
-<iframe src="https://githubbadge.appspot.com/zpr1g?s=1&a=0" style="border: 0;height: 160px;width: 240px;overflow: hidden; margin: unset;" frameBorder="0"></iframe>
+<iframe src="https://githubbadge.appspot.com/theprimone?s=1&a=0" style="border: 0;height: 160px;width: 240px;overflow: hidden; margin: unset;" frameBorder="0"></iframe>
 </div>

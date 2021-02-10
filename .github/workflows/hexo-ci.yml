@@ -16,5 +16,5 @@ jobs:
       - uses: yrpang/github-actions-hexo@master
         with:
           deploykey: ${{secrets.HEXO_DEPLOY_KEY}}
-          username: zpr1g
+          username: theprimone
           email: yuns.xie@qq.com
