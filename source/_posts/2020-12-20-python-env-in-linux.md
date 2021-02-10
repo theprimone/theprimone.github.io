@@ -21,6 +21,8 @@ updated: 2020-12-20 23:04:42
 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
 ```
 
+<!-- more -->
+
 ### 编辑源配置文件
 
 ```bash
